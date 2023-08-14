@@ -27,6 +27,12 @@
             cursor: pointer;
             position: relative;
             border-radius: 10px;
+            font-size: 18px; /* Initial font size */
+            transition: font-size 0.3s ease; /* Smooth transition for font size change */
+        }
+
+        .glow-on-hover:hover {
+            font-size: 20px; /* Increased font size on hover */
         }
 
         .glow-on-hover:before {
@@ -56,10 +62,26 @@
             100% { background-position: 0 0; }
         }
     </style>
+    <script>
+        function simulateDownload() {
+            var button = document.getElementById("pdfButton");
+            var buttonText = document.querySelector(".glow-on-hover");
+
+            button.setAttribute("disabled", "true");
+            buttonText.textContent = "Downloading...";
+
+            setTimeout(function () {
+                buttonText.textContent = "Download CV";
+                button.removeAttribute("disabled");
+            }, 1500);
+        }
+    </script>
 </head>
 
 <body>
-    <button class="glow-on-hover" type="button"><a id="pdfButton" href="./muadh2.pdf" download></a> Download CV</button>
+    <a id="pdfButton" href="./muadh2.pdf" download>
+        <button class="glow-on-hover" type="button" onclick="simulateDownload()">Download CV</button>
+    </a>
 </body>
 
 </html>

@@ -57,6 +57,61 @@
           <ion-icon name="chevron-down"></ion-icon>
         </button>
         developer
+
+        <style>
+          .glow-on-hover {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+              width: 220px;
+              height: 50px;
+              border: none;
+              outline: none;
+              color: #fff;
+              background: #111;
+              cursor: pointer;
+              position: relative;
+              border-radius: 10px;
+              font-size: 18px; /* Initial font size */
+              transition: font-size 0.3s ease; /* Smooth transition for font size change */
+          }
+  
+          .glow-on-hover:hover {
+              font-size: 20px; /* Increased font size on hover */
+          }
+  
+          .glow-on-hover:before {
+              content: '';
+              background: linear-gradient(45deg, #ffd700, #ffd700);
+              position: absolute;
+              top: -2px;
+              left: -2px;
+              background-size: 400%;
+              z-index: -1;
+              filter: blur(5px);
+              width: calc(100% + 4px);
+              height: calc(100% + 4px);
+              animation: glowing 20s linear infinite;
+              opacity: 0;
+              transition: opacity .3s ease-in-out;
+              border-radius: 10px;
+          }
+  
+          .glow-on-hover:hover:before {
+              opacity: 1;
+          }
+  
+          @keyframes glowing {
+              0% { background-position: 0 0; }
+              50% { background-position: 400% 0; }
+              100% { background-position: 0 0; }
+          }
+      </style>
+      <div class="downloadcv">
+        <a id="pdfButton" href="./muadh2.pdf" download>
+          <button class="glow-on-hover" type="button" onclick="simulateDownload()">Download CV</button>
+      </a>
+    </div>
       </div>
 
       <div class="sidebar-info_more">
@@ -1197,6 +1252,20 @@ ML involves training computer algorithms to recognize patterns in data, allowing
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script>
+    function simulateDownload() {
+        var button = document.getElementById("pdfButton");
+        var buttonText = document.querySelector(".glow-on-hover");
+
+        button.setAttribute("disabled", "true");
+        buttonText.textContent = "Downloading...";
+
+        setTimeout(function () {
+            buttonText.textContent = "Download CV";
+            button.removeAttribute("disabled");
+        }, 1500);
+    }
+</script>
 
 </body>
 
